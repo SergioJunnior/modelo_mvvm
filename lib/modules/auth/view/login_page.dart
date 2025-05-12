@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:modelo_mvvm/modules/auth/repositories/auth_repository.dart';
+import 'package:modelo_mvvm/core/dependecies/configure_dependencies.dart';
 import 'package:modelo_mvvm/modules/auth/viewModels/login_view_model.dart';
 
 class LoginPage extends StatefulWidget {
@@ -10,7 +10,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final LoginViewModel _loginViewModel = LoginViewModel(AuthRepository);
+  final _loginViewModel = getIt<LoginViewModel>();
 
   @override
   void dispose() {
@@ -25,6 +25,8 @@ class _LoginPageState extends State<LoginPage> {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: 16,
           children: [
             ValueListenableBuilder(
@@ -52,7 +54,12 @@ class _LoginPageState extends State<LoginPage> {
                 );
               },
             ),
-            ElevatedButton(onPressed: () {}, child: const Text('Entrar')),
+            ElevatedButton(
+              onPressed: () {
+                _loginViewModel.handleLogin(context);
+              },
+              child: const Text('Entrar'),
+            ),
           ],
         ),
       ),

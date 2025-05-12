@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:modelo_mvvm/modules/auth/models/auth_model.dart';
 import 'package:modelo_mvvm/modules/auth/repositories/auth_repository.dart';
 
 class LoginViewModel extends ChangeNotifier {
@@ -12,10 +11,8 @@ class LoginViewModel extends ChangeNotifier {
   ValueNotifier<String> get email => _email;
   ValueNotifier<String> get senha => _senha;
 
-  _handleLogin(BuildContext context, AuthModel authModel) async {
+  Future<void> handleLogin(BuildContext context) async {
     final success = await _authRepository.login(email.value, senha.value);
-    if (success) {
-      print(authModel);
-    }
+    print(success);
   }
 }

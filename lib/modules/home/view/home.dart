@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:modelo_mvvm/modules/home/view_model/home_view_model.dart';
+import 'package:modelo_mvvm/routes/routes.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -33,7 +35,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: viewModel.incrementCounter,
+        onPressed: () {
+          context.push(Routes.login);
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
