@@ -12,7 +12,6 @@ class LoginViewModel extends ChangeNotifier {
   ValueNotifier<String> get senha => _senha;
 
   Future<void> handleLogin(BuildContext context) async {
-    final success = await _authRepository.login(email.value, senha.value);
-    print(success);
+    await _authRepository.login(email.value, senha.value);
   }
 }

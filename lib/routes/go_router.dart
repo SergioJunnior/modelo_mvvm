@@ -12,7 +12,7 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: Routes.home,
-      builder: (context, state) => const MyHomePage(title: 'Home Page'),
+      builder: (context, state) => const MyHomePage(title: 'Projeto MVVM'),
     ),
     GoRoute(path: Routes.login, builder: (context, state) => const LoginPage()),
   ],
