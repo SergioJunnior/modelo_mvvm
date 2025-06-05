@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "47512341921",
+    "project_id": "modelomvvm",
+    "storage_bucket": "modelomvvm.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47512341921:android:a03a2e4e7c20c845f50fe0",
+        "android_client_info": {
+          "package_name": "com.example.modelo_mvvm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzIDN9Ud07JXTxvY5otq4FBFaRq7BCaCQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

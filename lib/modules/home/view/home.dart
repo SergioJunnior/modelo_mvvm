@@ -112,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
+          crossAxisCount: 1,
           crossAxisSpacing: 8.0, // Espaçamento horizontal
           mainAxisSpacing: 8.0, // Espaçamento vertical
           childAspectRatio: 0.7,

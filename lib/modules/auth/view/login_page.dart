@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:modelo_mvvm/core/dependecies/configure_dependencies.dart';
+import 'package:modelo_mvvm/core/design_system/components/auth/text_field_component.dart';
 import 'package:modelo_mvvm/modules/auth/viewModels/login_view_model.dart';
 
 class LoginPage extends StatefulWidget {
@@ -21,7 +22,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -29,36 +29,63 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: 16,
           children: [
+            const Icon(Icons.facebook, size: 100, color: Colors.deepPurple),
             ValueListenableBuilder(
               valueListenable: _loginViewModel.email,
               builder: (context, snapshot, _) {
-                return TextField(
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(labelText: 'Email'),
+                return TextFieldComponent(
+                  keyBoardType: TextInputType.emailAddress,
+                  hintText: 'Email',
                   onChanged: (value) {
                     _loginViewModel.email.value = value;
                   },
+                  //errorText: 'Email Inválido',
+                  prefixIcon: const Icon(
+                    Icons.email_outlined,
+                    color: Colors.deepPurple,
+                    size: 22,
+                  ),
                 );
               },
             ),
             ValueListenableBuilder(
-              valueListenable: _loginViewModel.senha,
+              valueListenable: _loginViewModel.passwordVisibility,
               builder: (context, snapshot, _) {
-                return TextField(
-                  keyboardType: TextInputType.emailAddress,
-                  obscureText: true,
-                  decoration: const InputDecoration(labelText: 'Email'),
+                return TextFieldComponent(
+                  hintText: 'Senha',
+                  obscureText: snapshot,
                   onChanged: (value) {
                     _loginViewModel.senha.value = value;
                   },
+                  //errorText: 'Senha Inválido',
+                  prefixIcon: const Icon(
+                    Icons.lock_outline,
+                    size: 22,
+                    color: Colors.deepPurple,
+                  ),
+                  suffixIcon:
+                      snapshot == true
+                          ? const Icon(Icons.visibility_off)
+                          : const Icon(
+                            Icons.visibility_outlined,
+                            color: Colors.deepPurple,
+                          ),
+                  onSuffixIconPressed: _loginViewModel.togglePasswordVisibility,
                 );
               },
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+              ),
               onPressed: () {
                 _loginViewModel.handleLogin(context);
               },
-              child: const Text('Entrar'),
+              child: const Text(
+                'Entrar',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
             ),
           ],
         ),

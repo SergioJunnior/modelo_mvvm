@@ -20,7 +20,7 @@ class _SplashPageState extends State<SplashPage> {
             const Text('Splash Screen'),
             ElevatedButton(
               onPressed: () {
-                context.go(Routes.home);
+                context.go(Routes.login);
               },
               child: const Text('Go to Home Page'),
             ),
