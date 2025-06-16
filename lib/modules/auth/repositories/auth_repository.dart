@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modelo_mvvm/modules/auth/models/auth_model.dart';
 import 'package:modelo_mvvm/modules/auth/services/auth_service.dart';
 
@@ -13,5 +14,21 @@ class AuthRepository {
     } catch (e) {
       return null;
     }
+  }
+
+  Future<void> logout() async {
+    await _authService.logout();
+  }
+
+  User? get currentUser => _authService.currentUser;
+
+  Stream<User?> get authStateChanges => _authService.authStateChanges;
+
+  Future<AuthModel?> getCurrentUserModel() async {
+    final user = currentUser;
+    if (user != null) {
+      return await AuthModel.fromFirebaseUser(user);
+    }
+    return null;
   }
 }
