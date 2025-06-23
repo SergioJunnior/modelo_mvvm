@@ -22,7 +22,7 @@ class _SplashPageState extends State<SplashPage> {
               onPressed: () {
                 context.go(Routes.login);
               },
-              child: const Text('Go to Home Page'),
+              child: const Text('Go to Login Page'),
             ),
           ],
         ),
