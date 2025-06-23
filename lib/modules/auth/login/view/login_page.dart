@@ -98,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               onPressed: () {
-                context.go(Routes.register);
+                context.push(Routes.register);
               },
               child: const Text(
                 'Cadastre-se',
