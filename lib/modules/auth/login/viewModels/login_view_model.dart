@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:modelo_mvvm/modules/auth/login/repositories/auth_repository.dart';
+import 'package:modelo_mvvm/modules/auth/login/services/auth_service.dart';
 
 class LoginViewModel extends ChangeNotifier {
-  final AuthRepository _authRepository;
+  final AuthService _authService;
   final ValueNotifier<bool> _passwordVisibility = ValueNotifier<bool>(true);
   final ValueNotifier<String> _email = ValueNotifier<String>('');
   final ValueNotifier<String> _senha = ValueNotifier<String>('');
 
-  LoginViewModel(this._authRepository);
+  LoginViewModel(this._authService);
 
   ValueNotifier<bool> get passwordVisibility => _passwordVisibility;
   ValueNotifier<String> get email => _email;
@@ -18,6 +18,6 @@ class LoginViewModel extends ChangeNotifier {
   }
 
   Future<void> handleLogin(BuildContext context) async {
-    await _authRepository.login(email.value, senha.value);
+    await _authService.login(email.value, senha.value);
   }
 }
