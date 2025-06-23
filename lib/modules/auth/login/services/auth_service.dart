@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:modelo_mvvm/modules/auth/models/auth_model.dart';
+import 'package:modelo_mvvm/modules/auth/login/models/auth_model.dart';
 
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;

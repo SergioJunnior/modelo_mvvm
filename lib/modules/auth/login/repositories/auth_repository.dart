@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:modelo_mvvm/modules/auth/models/auth_model.dart';
-import 'package:modelo_mvvm/modules/auth/services/auth_service.dart';
+import 'package:modelo_mvvm/modules/auth/login/models/auth_model.dart';
+import 'package:modelo_mvvm/modules/auth/login/services/auth_service.dart';
 
 class AuthRepository {
   final AuthService _authService;

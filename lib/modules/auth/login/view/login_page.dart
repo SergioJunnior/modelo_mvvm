@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:modelo_mvvm/core/dependecies/configure_dependencies.dart';
 import 'package:modelo_mvvm/core/design_system/components/auth/text_field_component.dart';
-import 'package:modelo_mvvm/modules/auth/viewModels/login_view_model.dart';
+import 'package:modelo_mvvm/modules/auth/login/viewModels/login_view_model.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
