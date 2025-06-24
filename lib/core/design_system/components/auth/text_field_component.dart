@@ -70,6 +70,7 @@ class _TextFieldComponentState extends State<TextFieldComponent> {
               borderSide: const BorderSide(color: Colors.red, width: 1.5),
             ),
             errorText: widget.errorText,
+            errorStyle: const TextStyle(color: Colors.red),
             prefixIcon: widget.prefixIcon,
             suffixIcon:
                 widget.suffixIcon != null
