@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:modelo_mvvm/core/splash_page.dart';
-import 'package:modelo_mvvm/modules/auth/view/login_page.dart';
+import 'package:modelo_mvvm/modules/auth/login/view/login_page.dart';
+import 'package:modelo_mvvm/modules/auth/register/view/register_page.dart';
 import 'package:modelo_mvvm/modules/home/view/home.dart';
 import 'package:modelo_mvvm/routes/routes.dart';
 
@@ -15,5 +16,9 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) => const MyHomePage(title: 'Projeto MVVM'),
     ),
     GoRoute(path: Routes.login, builder: (context, state) => const LoginPage()),
+    GoRoute(
+      path: Routes.register,
+      builder: (context, state) => const RegisterPage(),
+    ),
   ],
 );

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:modelo_mvvm/core/dependecies/configure_dependencies.dart';
 import 'package:modelo_mvvm/core/design_system/components/auth/text_field_component.dart';
-import 'package:modelo_mvvm/modules/auth/viewModels/login_view_model.dart';
+import 'package:modelo_mvvm/modules/auth/login/viewModels/login_view_model.dart';
+import 'package:modelo_mvvm/routes/routes.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -85,6 +87,22 @@ class _LoginPageState extends State<LoginPage> {
               child: const Text(
                 'Entrar',
                 style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                  side: const BorderSide(color: Colors.deepPurple),
+                ),
+              ),
+              onPressed: () {
+                context.push(Routes.register);
+              },
+              child: const Text(
+                'Cadastre-se',
+                style: TextStyle(color: Colors.deepPurple, fontSize: 16),
               ),
             ),
           ],
