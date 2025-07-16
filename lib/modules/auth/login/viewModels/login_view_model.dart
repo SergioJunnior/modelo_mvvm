@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:modelo_mvvm/modules/auth/login/services/auth_service.dart';
+import 'package:modelo_mvvm/routes/routes.dart';
 
 class LoginViewModel extends ChangeNotifier {
   final AuthService _authService;
@@ -18,6 +20,25 @@ class LoginViewModel extends ChangeNotifier {
   }
 
   Future<void> handleLogin(BuildContext context) async {
-    await _authService.login(email.value, senha.value);
+    try {
+      await _authService.login(email.value, senha.value);
+
+      // Se chegou aqui, o login foi bem-sucedido
+      if (context.mounted) {
+        context.go(Routes.home);
+      }
+    } catch (e) {
+      // Em caso de erro, mostra o SnackBar
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString().replaceFirst('Exception: ', '')),
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+            duration: const Duration(seconds: 4),
+          ),
+        );
+      }
+    }
   }
 }
