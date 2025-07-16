@@ -84,7 +84,8 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: () async {
                 final success = await _loginViewModel.handleLogin(context);
 
-                if (!success && context.mounted) {
+                // Só mostra SnackBar se login falhou E o contexto ainda estiver válido
+                if (!success && mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(

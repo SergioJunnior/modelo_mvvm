@@ -37,11 +37,9 @@ class LoginViewModel extends ChangeNotifier {
           _lastError = error.toString().replaceFirst('Exception: ', '');
         });
 
-    if (loginSuccess) {
-      // Login bem-sucedido - navega para home
-      if (context.mounted) {
-        context.go(Routes.home);
-      }
+    // Só navega se login foi bem-sucedido E o contexto ainda estiver montado
+    if (loginSuccess && context.mounted) {
+      context.go(Routes.home);
     }
 
     return loginSuccess;
