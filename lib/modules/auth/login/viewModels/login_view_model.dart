@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:modelo_mvvm/modules/auth/login/services/auth_service.dart';
-import 'package:modelo_mvvm/routes/routes.dart';
 
 class LoginViewModel extends ChangeNotifier {
   final AuthService _authService;
@@ -22,7 +20,7 @@ class LoginViewModel extends ChangeNotifier {
     _passwordVisibility.value = !_passwordVisibility.value;
   }
 
-  Future<bool> handleLogin(BuildContext context) async {
+  Future<bool> handleLogin() async {
     _lastError = null;
     bool loginSuccess = false;
 
@@ -36,11 +34,6 @@ class LoginViewModel extends ChangeNotifier {
           loginSuccess = false;
           _lastError = error.toString().replaceFirst('Exception: ', '');
         });
-
-    // Só navega se login foi bem-sucedido E o contexto ainda estiver montado
-    if (loginSuccess && context.mounted) {
-      context.go(Routes.home);
-    }
 
     return loginSuccess;
   }

@@ -82,20 +82,31 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
               onPressed: () async {
-                final success = await _loginViewModel.handleLogin(context);
+                final success = await _loginViewModel.handleLogin();
 
-                // Só mostra SnackBar se login falhou E o contexto ainda estiver válido
-                if (!success && mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        _loginViewModel.lastError ?? 'Erro desconhecido',
-                      ),
-                      backgroundColor: Colors.red,
-                      behavior: SnackBarBehavior.floating,
-                      duration: const Duration(seconds: 4),
-                    ),
-                  );
+                if (success) {
+                  // Login bem-sucedido - navega para home
+                  if (mounted) {
+                    context.go(Routes.home);
+                  }
+                } else {
+                  // Login falhou - mostra SnackBar
+                  if (mounted) {
+                    try {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            _loginViewModel.lastError ?? 'Erro desconhecido',
+                          ),
+                          backgroundColor: Colors.red,
+                          behavior: SnackBarBehavior.floating,
+                          duration: const Duration(seconds: 4),
+                        ),
+                      );
+                    } catch (e) {
+                      debugPrint('Erro ao mostrar SnackBar: $e');
+                    }
+                  }
                 }
               },
               child: const Text(
