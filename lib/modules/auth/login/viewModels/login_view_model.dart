@@ -20,19 +20,31 @@ class LoginViewModel extends ChangeNotifier {
   }
 
   Future<void> handleLogin(BuildContext context) async {
-    try {
-      await _authService.login(email.value, senha.value);
+    String? errorMessage;
+    bool loginSuccess = false;
 
-      // Se chegou aqui, o login foi bem-sucedido
+    // Tenta fazer login e captura resultado
+    await _authService
+        .login(email.value, senha.value)
+        .then((result) {
+          loginSuccess = true;
+        })
+        .catchError((error) {
+          loginSuccess = false;
+          errorMessage = error.toString().replaceFirst('Exception: ', '');
+        });
+
+    if (loginSuccess) {
+      // Login bem-sucedido - navega para home
       if (context.mounted) {
         context.go(Routes.home);
       }
-    } catch (e) {
-      // Em caso de erro, mostra o SnackBar
+    } else {
+      // Login falhou - mostra erro no SnackBar
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(e.toString().replaceFirst('Exception: ', '')),
+            content: Text(errorMessage ?? 'Erro desconhecido'),
             backgroundColor: Colors.red,
             behavior: SnackBarBehavior.floating,
             duration: const Duration(seconds: 4),
