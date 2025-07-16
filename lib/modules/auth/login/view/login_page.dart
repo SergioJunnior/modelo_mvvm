@@ -81,8 +81,21 @@ class _LoginPageState extends State<LoginPage> {
                 backgroundColor: Colors.deepPurple,
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
-              onPressed: () {
-                _loginViewModel.handleLogin(context);
+              onPressed: () async {
+                final success = await _loginViewModel.handleLogin(context);
+
+                if (!success && context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        _loginViewModel.lastError ?? 'Erro desconhecido',
+                      ),
+                      backgroundColor: Colors.red,
+                      behavior: SnackBarBehavior.floating,
+                      duration: const Duration(seconds: 4),
+                    ),
+                  );
+                }
               },
               child: const Text(
                 'Entrar',

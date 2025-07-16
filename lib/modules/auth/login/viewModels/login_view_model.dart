@@ -9,18 +9,21 @@ class LoginViewModel extends ChangeNotifier {
   final ValueNotifier<String> _email = ValueNotifier<String>('');
   final ValueNotifier<String> _senha = ValueNotifier<String>('');
 
+  String? _lastError;
+
   LoginViewModel(this._authService);
 
   ValueNotifier<bool> get passwordVisibility => _passwordVisibility;
   ValueNotifier<String> get email => _email;
   ValueNotifier<String> get senha => _senha;
+  String? get lastError => _lastError;
 
   void togglePasswordVisibility() {
     _passwordVisibility.value = !_passwordVisibility.value;
   }
 
-  Future<void> handleLogin(BuildContext context) async {
-    String? errorMessage;
+  Future<bool> handleLogin(BuildContext context) async {
+    _lastError = null;
     bool loginSuccess = false;
 
     // Tenta fazer login e captura resultado
@@ -31,7 +34,7 @@ class LoginViewModel extends ChangeNotifier {
         })
         .catchError((error) {
           loginSuccess = false;
-          errorMessage = error.toString().replaceFirst('Exception: ', '');
+          _lastError = error.toString().replaceFirst('Exception: ', '');
         });
 
     if (loginSuccess) {
@@ -39,18 +42,8 @@ class LoginViewModel extends ChangeNotifier {
       if (context.mounted) {
         context.go(Routes.home);
       }
-    } else {
-      // Login falhou - mostra erro no SnackBar
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(errorMessage ?? 'Erro desconhecido'),
-            backgroundColor: Colors.red,
-            behavior: SnackBarBehavior.floating,
-            duration: const Duration(seconds: 4),
-          ),
-        );
-      }
     }
+
+    return loginSuccess;
   }
 }
